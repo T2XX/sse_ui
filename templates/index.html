@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>SSE TEST</title>
+</head>
+
+<body>
+    <h1>SSE TEST</h1>
+    <div id="messages"></div>
+    <script>
+        const eventSource = new EventSource('/nice_gui/message_channel');
+
+        eventSource.onmessage = function (event) {
+            document.getElementById('messages').innerHTML = JSON.parse(event.data).content;
+        };
+        eventSource.onerror = function (event) {
+            alert("connect loss");
+        };
+    </script>
+</body>
+
+</html>
